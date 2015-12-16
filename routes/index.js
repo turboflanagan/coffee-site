@@ -15,20 +15,25 @@ router.get('/', function (req, res) {
 ////////////////////////////////////////
 
 // Get the register page
-router.get('/register', function(req, res) {
+router.get('/register', function (req, res) {
     res.render('register', { });
 });
 
 //Post to the register page
-router.post('/register', function(req, res) {
+router.post('/register', function (req, res) {
     //The mongo statement to insert the new vars into the db
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-        if (err) {
-            return res.render('register', { err : err });
-        }
+    Account.register(new Account(
+            { username : req.body.username }
+        ),
+        req.body.password, 
+        function(err, account) {
+            if (err) {
+                return res.render('register', { err : err });
+            }  //the return above removes the need for an else statement because it will
+               // exit the function.  Without return above, an else statement would be needed.
         passport.authenticate('local')(req, res, function () {
             req.session.username = req.body.username;
-            res.render('index', { username : req.session.username });
+            res.render('choices', { username : req.session.username });
         });
     });
 });
@@ -37,7 +42,7 @@ router.post('/register', function(req, res) {
 /* ----------Login----------- */
 /* ---------------------------- */
 //Get the login page
-router.get('/login', function(req, res) {
+router.get('/login', function (req, res, next) {
 
     //the user is already logged in
     if(req.session.username){
@@ -49,21 +54,11 @@ router.get('/login', function(req, res) {
         res.render('login', { failed : "Your username or password is incorrect." });    
     }
     //They are here and aren't logged in
-    res.render('login', { user : req.user });
-}).post('/login', function(req, res, next) {
+    // res.render('login', { });
+})
 
-    if(req.body.getStarted){
-        Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-            if (err) {
-                return res.render('register', { err : err });
-            }
-            if(!err)
-            passport.authenticate('local')(req, res, function () {
-                req.session.username = req.body.username;
-                res.render('choices', { username : req.session.username });
-            });
-        });        
-    }
+router.post('/login', function(req, res, next) {
+
 
     if (!req.body.getStarted){
       passport.authenticate('local', function(err, user, info) {
@@ -102,6 +97,51 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
+/* ---------------------------- */
+/* ---------CHOICES GET--------- */
+/* ---------------------------- */
+
+router.get('/choices', function (req, res, next){
+    // Make sure the user is logged in!
+    if(req.session.username){
+        //They do belong here. Proceed with the page.
+        // Check to see if they have prefs set already.
+
+        // Render the choices view
+        res.render('choices');
+    }else{
+        res.redirect('/');
+    }
+});
+
+
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
