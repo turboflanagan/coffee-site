@@ -8,6 +8,10 @@ var router = express.Router();
 router.get('/', function (req, res) {
     //res.send(req.session);
     res.render('index', { username : req.session.username });
+    console.log(username);
+    console.log("==============================username=========================");
+
+
 });
 
 ////////////////////////////////////////
@@ -106,7 +110,9 @@ router.get('/choices', function (req, res, next){
     if(req.session.username){
         //They do belong here. Proceed with the page.
         // Check to see if they have prefs set already.
-
+        Account.findOne(
+            { username: req.session.username }
+        ), function (err, doc){ var currGrind = doc.grind ? doc.grind : undefined }
         // Render the choices view
         res.render('choices');
     }else{
@@ -114,8 +120,68 @@ router.get('/choices', function (req, res, next){
     }
 });
 
+router.post('/choices', function (req, res, next){
+    if(req.session.username){
+    // Make sure the user is logged in!      
+    var newGrind = req.body.grind;
+    var newPounds = req.body.quarterpounds;
+    var newFrequency = req.body.frequency;
 
+        Account.findOneAndUpdate(
+            { username: req.session.username },
+            { grind: newGrind },
+            { upsert: true },
+            function (err, account){
+                if (err){
+                    res.send('There was an error saving your preferences.  Please re-enter or send this error to our help team: ' + err)
+                }else{
+                    console.log("=================================================")
+                    console.log(accounts)
+                    console.log("=================================================")
+                    account.save;
+                }
+            }
+        )
 
+        Account.findOneAndUpdate(
+            { username: req.session.username },
+            { frequency: newFrequency },
+            { upsert: true },
+            function (err, account){
+                if (err){
+                    res.send('There was an error saving your preferences.  Please re-enter or send this error to our help team: ' + err)
+                }else{
+                    console.log("=================================================")
+                    console.log(account)
+                    console.log("=================================================")
+                    account.save;
+                }
+            }
+        )
+
+        Account.findOneAndUpdate(
+            { username: req.session.username },
+            { pounds: newPounds },
+            { upsert: true },
+            function (err, account){
+                if (err){
+                    res.send('There was an error saving your preferences.  Please re-enter or send this error to our help team: ' + err)
+                }else{
+                    console.log("=================================================")
+                    console.log(account)
+                    console.log("=================================================")
+                    account.save;
+                }
+            }
+        )
+        res.send('choices submitted');
+    }
+});
+    
+
+router.get('/delivery', function (req, res, next) {
+    res.send("<h1>Welcome to the delivery page</h1>")
+});
 
 module.exports = router;
 

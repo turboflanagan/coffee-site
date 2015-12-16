@@ -631,16 +631,21 @@ h2.how-it-works_label {
   line-height: 1.4;
   text-align: center;
 }
-/* line 21, ../../compass/sass/views/_choices.scss */
-#plan-wrapper .choices-image {
+/* line 20, ../../compass/sass/views/_choices.scss */
+#plan-wrapper #choices-sub-header #submit-choices-btn {
+  margin-top: 30px;
   text-align: center;
 }
-/* line 23, ../../compass/sass/views/_choices.scss */
-#plan-wrapper .choices-image img {
+/* line 24, ../../compass/sass/views/_choices.scss */
+#plan-wrapper #choices-sub-header .choices-image {
+  text-align: center;
+}
+/* line 26, ../../compass/sass/views/_choices.scss */
+#plan-wrapper #choices-sub-header .choices-image img {
   max-width: 100%;
 }
-/* line 27, ../../compass/sass/views/_choices.scss */
-#plan-wrapper .choices-block {
+/* line 30, ../../compass/sass/views/_choices.scss */
+#plan-wrapper #choices-sub-header .choices-block {
   border: 1px solid #d8d3c8;
   border-radius: 5px;
   margin: 30px auto;
