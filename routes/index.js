@@ -5,7 +5,7 @@ var Account = require('../models/account');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
     //res.send(req.session);
     res.render('index', { username : req.session.username });
     console.log(username);
@@ -36,6 +36,9 @@ router.post('/register', function (req, res) {
             }  //the return above removes the need for an else statement because it will
                // exit the function.  Without return above, an else statement would be needed.
         passport.authenticate('local')(req, res, function () {
+        	console.log('=========user object========')
+        	console.log(req.user);
+        	console.log('===================')
             req.session.username = req.body.username;
             res.render('choices', { username : req.session.username });
         });
@@ -50,7 +53,7 @@ router.get('/login', function (req, res, next) {
 
     //the user is already logged in
     if(req.session.username){
-        res.redirect('/choices');
+        res.redirect('/index');
     }
     //req.query.login pulls the query parameters right out of the http headers!
     //They are here and failed a login
@@ -58,13 +61,19 @@ router.get('/login', function (req, res, next) {
         res.render('login', { failed : "Your username or password is incorrect." });    
     }
     //They are here and aren't logged in
+<<<<<<< HEAD
     // res.render('login', { });
 })
 
 router.post('/login', function(req, res, next) {
 
+=======
+    res.render('login', { });
+})
 
-    if (!req.body.getStarted){
+router.post('/login', function(req, res, next) {
+>>>>>>> master
+
       passport.authenticate('local', function(err, user, info) {
         if (err) {
           return next(err); // will generate a 500 error
@@ -87,9 +96,8 @@ router.post('/login', function(req, res, next) {
             req.session.username = user.username;
         }
 
-        return res.redirect('/choices');
+        return res.redirect('/');
       })(req, res, next);
-    }
 });
 
 /* ---------------------------- */
