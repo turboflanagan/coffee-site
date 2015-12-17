@@ -113,8 +113,9 @@ router.get('/choices', function (req, res, next){
         Account.findOne(
             { username: req.session.username }
         ), function (err, doc){ var currGrind = doc.grind ? doc.grind : undefined }
+
         // Render the choices view
-        res.render('choices');
+        res.render('choices', { username: req.session.username });
     }else{
         res.redirect('/');
     }
@@ -127,6 +128,8 @@ router.post('/choices', function (req, res, next){
     var newPounds = req.body.quarterpounds;
     var newFrequency = req.body.frequency;
 
+    var query = {username: req.session.username};
+    // var update = 
         Account.findOneAndUpdate(
             { username: req.session.username },
             { grind: newGrind },
@@ -136,7 +139,7 @@ router.post('/choices', function (req, res, next){
                     res.send('There was an error saving your preferences.  Please re-enter or send this error to our help team: ' + err)
                 }else{
                     console.log("=================================================")
-                    console.log(accounts)
+                    console.log(account)
                     console.log("=================================================")
                     account.save;
                 }
@@ -180,7 +183,7 @@ router.post('/choices', function (req, res, next){
     
 
 router.get('/delivery', function (req, res, next) {
-    res.send("<h1>Welcome to the delivery page</h1>")
+    res.render('delivery', { username: req.session.username });
 });
 
 module.exports = router;
