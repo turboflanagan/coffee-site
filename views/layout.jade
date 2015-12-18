@@ -21,19 +21,22 @@ html
 						#nav-log-in
 							a(href="/login") Log In
 						#nav-subscribe
-							a.btn.btn-primary(href="/register") Subscribe
+							a.btn.btn-primary(href="/register") Register
 					if (username)
 						#nav-log-in Welcome,
 							a(href="/myaccount") #{username}
 							a.btn.btn-primary(href="/logout") Logout
+							if (accessLevel)
+								a.btn.btn-primary(href="/admin") Admin
 
-		if (username)
+
+		if (active)
 			#signup-wrapper
 				.container
 					ul.signup-progress
 						li
 							a(href="/").welcome 1. Welcome
-						li.active
+						li
 							a(href="/choices").options 2. Options
 						li
 							a(href="/delivery").delivery  3. Delivery
@@ -72,5 +75,7 @@ html
 					li
 						a(href="https://flic.kr/p/nfKZAo") mahmoud99725
 
+
+		include analytics.html
 
 
