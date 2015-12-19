@@ -30,17 +30,17 @@ html
 								a.btn.btn-primary(href="/admin") Admin
 
 
-		if (active)
+		if (username)
 			#signup-wrapper
 				.container
 					ul.signup-progress
-						li
+						li(class=(menuItem === 'welcome') ? "active" : "")
 							a(href="/").welcome 1. Welcome
-						li
+						li(class=(menuItem === 'options') ? "options" : "")
 							a(href="/choices").options 2. Options
-						li
+						li(class=(menuItem === 'delivery') ? "delivery" : "")
 							a(href="/delivery").delivery  3. Delivery
-						li
+						li(class=(menuItem === 'payment') ? "payment" : "")
 							a(href="/payment").payment 4. Payment
 
 		block content

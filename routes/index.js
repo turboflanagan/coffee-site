@@ -10,7 +10,7 @@ var stripe = require("stripe")("sk_test_qdcjW5fecCmIPkjs1RJRbNpp");
 /* GET home page. */
 router.get('/', function (req, res, next) {
     //res.send(req.session);
-    res.render('index', { username : req.session.username });
+    res.render('index', { username : req.session.username, menuItem: 'welcome' });
     console.log(username);
     console.log("==============================username=========================");
 
@@ -122,21 +122,22 @@ router.get('/choices', function (req, res, next){
                 var currPounds = doc.pounds ? doc.pounds : undefined
                 var currFrequency = doc.frequency ? doc.frequency : undefined
 
-                console.log("************************  doc  *************************")
-                console.log(doc);
-                console.log("************************  doc  *************************")
+                // console.log("************************  doc  *************************")
+                // console.log(doc);
+                // console.log("************************  doc  *************************")
                 
+                // Render the choices view
                 res.render('choices', { 
-                    user: req.session.username,
+                    menuItem: 'options',
+                    username: req.session.username,
                     grind: currGrind,
                     pounds: currPounds,
                     frequency: currFrequency,
                     accessLevel: req.session.accessLevel
                 });
-                console.log()
+                // console.log()
             });
-        // Render the choices view
-        res.render('choices', { username: req.session.username });
+        res.render('choices', { username: req.session.username, menuItem: 'options' });
     }else{
         res.redirect('/');
     }

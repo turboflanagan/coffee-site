@@ -24,6 +24,17 @@ body {
   color: #dc0707;
 }
 
+/* line 30, ../../compass/sass/layout/_layout.scss */
+img {
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+/* line 35, ../../compass/sass/layout/_layout.scss */
+#submit-choices-btn {
+  text-align: center;
+}
+
 /* line 6, ../../compass/sass/layout/_header.scss */
 #header {
   background: url('../images/CupInBeans.jpg?1450275847') no-repeat center;
