@@ -176,7 +176,8 @@ router.get('/delivery', function (req, res, next) {
             { username: req.session.username }
         ),
         // Render the choices view
-        res.render('delivery', { username: req.session.username });
+        res.render('delivery', { username: req.session.username, menuItem: 'delivery' });
+        
     }else{
         res.redirect('/');
     }
@@ -262,7 +263,7 @@ router.post('/contact', function (req, res, next) {
 router.get('/payment', function (req, res, next) {
 if(req.session.username){
 
-    res.render('payment', { username: req.session.username });
+    res.render('payment', { username: req.session.username, menuItem: 'payment' });
     }
 });
 

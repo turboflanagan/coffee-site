@@ -36,11 +36,14 @@ html
 					ul.signup-progress
 						li(class=(menuItem === 'welcome') ? "active" : "")
 							a(href="/").welcome 1. Welcome
-						li(class=(menuItem === 'options') ? "options" : "")
+
+						li(class=(menuItem === 'options') ? "active" : "")
 							a(href="/choices").options 2. Options
-						li(class=(menuItem === 'delivery') ? "delivery" : "")
+
+						li(class=(menuItem === 'delivery') ? "active" : "")
 							a(href="/delivery").delivery  3. Delivery
-						li(class=(menuItem === 'payment') ? "payment" : "")
+							
+						li(class=(menuItem === 'payment') ? "active" : "")
 							a(href="/payment").payment 4. Payment
 
 		block content
