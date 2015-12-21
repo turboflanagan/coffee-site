@@ -4,7 +4,7 @@ var passport = require('passport');
 var Account = require('../models/account');
 var router = express.Router();
 var nodemailer = require('nodemailer');
-var vars = require('../config/vars.json');
+// var vars = require('../config/vars.json');
 var stripe = require("stripe")("sk_test_qdcjW5fecCmIPkjs1RJRbNpp");
 
 /* GET home page. */
