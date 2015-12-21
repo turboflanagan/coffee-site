@@ -43,7 +43,7 @@ router.post('/register', function (req, res) {
         	console.log(req.user);
         	console.log('===================')
             req.session.username = req.body.username;
-            res.redirect('choices', { username : req.session.username });
+            res.redirect('/choices');
         });
     });
 });
